@@ -1,0 +1,31 @@
+<%= form_with url: dashboard_path, method: :get, local: true do |f| %>
+  <div style="margin-bottom: 12px;">
+    <%= f.label :q, 'Search' %>
+    <%= f.text_field :q, value: params[:q] %>
+    <%= f.submit 'Search' %>
+    <% if params[:q].present? %>
+      <%= link_to 'Clear', dashboard_path, style: 'margin-left:8px' %>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="table-wrap">
+  <table>
+  <thead>
+    <tr>
+      <th><%= sortable 'display_name', 'Item' %></th>
+      <th><%= sortable 'amount', 'Amount' %></th>
+      <th>NBT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.display_name %></td>
+        <td><%= item.amount %></td>
+        <td><%= item.nbt %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
+</div>
